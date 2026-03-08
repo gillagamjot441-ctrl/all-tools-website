@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>All-in-One Free Tools</title>
+
+<style>
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+text-align:center;
+margin:0;
+}
+
+header{
+background:#1e293b;
+padding:20px;
+font-size:28px;
+}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+gap:15px;
+padding:20px;
+}
+
+button{
+padding:15px;
+border:none;
+border-radius:8px;
+background:#6366f1;
+color:white;
+cursor:pointer;
+}
+
+button:hover{
+background:#4f46e5;
+}
+
+.toolbox{
+margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<header>🧰 Free Online Tools</header>
+
+<div class="container">
+
+<button onclick="showTool('age')">Age Calculator</button>
+<button onclick="showTool('password')">Password Generator</button>
+<button onclick="showTool('word')">Word Counter</button>
+<button onclick="showTool('timer')">Study Timer</button>
+<button onclick="showTool('random')">Random Number</button>
+
+<button>Unit Converter</button>
+<button>BMI Calculator</button>
+<button>Tip Calculator</button>
+<button>Color Picker</button>
+<button>QR Generator</button>
+
+<button>Text to Uppercase</button>
+<button>Text to Lowercase</button>
+<button>Image Resizer</button>
+<button>Image to PNG</button>
+<button>Text Reverser</button>
+
+<button>Number Guess Game</button>
+<button>Stopwatch</button>
+<button>Percentage Calculator</button>
+<button>Temperature Converter</button>
+<button>Simple Calculator</button>
+
+</div>
+
+<div class="toolbox" id="toolbox"></div>
+
+<script>
+
+function showTool(tool){
+
+let box = document.getElementById("toolbox");
+
+if(tool==="age"){
+box.innerHTML = `
+<h2>Age Calculator</h2>
+<input type="date" id="birth">
+<br><br>
+<button onclick="calcAge()">Calculate</button>
+<p id="ageResult"></p>
+`;
+}
+
+if(tool==="password"){
+box.innerHTML = `
+<h2>Password Generator</h2>
+<button onclick="genPass()">Generate Password</button>
+<p id="pass"></p>
+`;
+}
+
+if(tool==="word"){
+box.innerHTML = `
+<h2>Word Counter</h2>
+<textarea id="text" rows="5" cols="30"></textarea>
+<br><br>
+<button onclick="countWords()">Count</button>
+<p id="wordResult"></p>
+`;
+}
+
+if(tool==="timer"){
+box.innerHTML = `
+<h2>Study Timer (seconds)</h2>
+<input id="time" type="number">
+<br><br>
+<button onclick="startTimer()">Start</button>
+<p id="timer"></p>
+`;
+}
+
+if(tool==="random"){
+box.innerHTML = `
+<h2>Random Number Generator</h2>
+<button onclick="rand()">Generate</button>
+<p id="randNum"></p>
+`;
+}
+
+}
+
+function calcAge(){
+let birth = new Date(document.getElementById("birth").value);
+let today = new Date();
+let age = today.getFullYear() - birth.getFullYear();
+document.getElementById("ageResult").innerText = "Age: "+age;
+}
+
+function genPass(){
+let chars="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789";
+let pass="";
+for(let i=0;i<10;i++){
+pass+=chars[Math.floor(Math.random()*chars.length)];
+}
+document.getElementById("pass").innerText=pass;
+}
+
+function countWords(){
+let text=document.getElementById("text").value;
+let words=text.trim().split(/\s+/).length;
+document.getElementById("wordResult").innerText="Words: "+words;
+}
+
+function startTimer(){
+let t=document.getElementById("time").value;
+let timer=setInterval(function(){
+document.getElementById("timer").innerText=t;
+t--;
+if(t<0){
+clearInterval(timer);
+document.getElementById("timer").innerText="Time up!";
+}
+},1000);
+}
+
+function rand(){
+let n=Math.floor(Math.random()*1000);
+document.getElementById("randNum").innerText=n;
+}
+
+</script>
+
+</body>
+</html>
